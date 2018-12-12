@@ -1,0 +1,105 @@
+*{
+    font-family: Garamond;
+    font-size: 24px;
+    margin: 0;
+    padding: 0;
+}
+
+
+#calculator{
+    
+    width: 220px;
+    margin: 0 auto;
+    margin-top: 50px;
+    background: #461D7C;
+    color: #FDD023;
+}
+
+#row-1, #row-2, #row-3, #row-4, #row-5{
+    display: flex;
+    padding: 2px 2px;
+}
+
+/* use CSS grid to make tall '=' sign */
+
+#equals-dummy{
+    background: black;
+    color: black;
+}
+
+ul{
+    
+    list-style: none;
+    text-align: center;
+}
+
+li {
+    width: 50px;
+    height: 40px;
+    line-height: 40px;
+    border: 1px solid #7D60A3;
+    margin: 2px;
+    
+}
+
+li:hover{
+    font-weight: 600;
+    background: #7D60A3;
+    cursor: pointer;
+}
+
+
+#all-displays{
+    font-weight: 600;
+    margin: 0 auto;
+    text-align: right;
+    padding: 10px;
+    max-width: 190px;
+    height: 50px;
+    border: 1px solid #7D60A3;
+
+}
+
+/* FIX THIS! */
+#all-displays:after{ 
+  content: "";
+  background: url(/img/lsu.jpg);
+  opacity: 0.5;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;   
+}
+
+
+.pressed {
+    background: #7D60A3;
+    font-weight: 600;
+}
+
+
+
+.flash {
+   animation-name: flash;
+    animation-duration: 0.8s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-play-state: running;
+    font-size: 16px;
+}
+
+@keyframes flash {
+    from {color: red;}
+    to {color: black;}
+}
+
+#clear{
+    background: #888;
+}
+
+#clear:hover{
+    background: #aaa;
+}
