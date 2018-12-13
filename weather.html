@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Weather App</title>
+        <link href="weather.css" type="text/css" rel="stylesheet">
+
+    </head>
+    <body>
+        <div id="weather-app">
+            <div id="five-day-wrapper" class="daybuttons">
+                <span class="day">
+                    <div class="day-title">Today</div>
+                    <div class="weather-image"><img src="img/error.jpg"></div>
+                    <div class="stats">
+                        <span id="today-high" class="highs">Hi: </span>
+                        <span id="today-low" class="lows">Lo: </span>
+                        <div id="today-descriptor" class="rain-chance">No Text</div>
+                        <div id="today-rain-chance" class="rain-chance">Rain: </div>
+                    </div>
+                </span>
+                <span class="day">
+                    <div class="day-title">Tomorrow</div>
+                    <div class="weather-image"><img src="img/error.jpg"></div>
+                    <div class="stats">
+                        <span id="tomorrow-high" class="highs">Hi: </span>
+                        <span id="tomorrow-low" class="lows">Lo: </span>
+                        <div id="today-descriptor" class="rain-chance">Cloudy</div>
+                        <div id="tomorrow-rain-chance" class="rain-chance">Rain: </div>
+                    </div>     
+                </span>
+                <span class="day">
+                    <div class="day-title">3rd Day</div>
+                    <div class="weather-image"><img src="img/error.jpg"></div>
+                    <div class="stats">
+                        <span id="3rd-day-high" class="highs">Hi: </span>
+                        <span id="3rd-day-low" class="lows">Lo: </span>
+                        <div id="today-descriptor" class="rain-chance">Sunny</div>
+                        <div id="3rd-day-rain-chance" class="rain-chance">Rain: </div>
+                    </div> 
+                </span>
+                <span class="day">
+                    <div class="day-title">4th Day</div>
+                    <div class="weather-image"><img src="img/error.jpg"></div>
+                    <div class="stats">
+                        <span id="4th-day-high" class="highs">Hi: </span>
+                        <span id="4th-day-low" class="lows">Lo: </span>
+                        <div id="today-descriptor" class="rain-chance">Showers</div>
+                        <div id="4th-day-rain-chance" class="rain-chance">Rain: </div>
+                    </div>
+                </span>
+                <span class="day">
+                    <div class="day-title">5th Day</div>
+                    <div class="weather-image"><img src="img/error.jpg"></div>
+                    <div class="stats">
+                        <span id="5th-day-high" class="highs">Hi: </span>
+                        <span id="5th-day-low" class="lows">Lo: </span>
+                        <div id="today-descriptor" class="rain-chance">Light Rain</div>
+                        <div id="5th-day-rain-chance" class="rain-chance">Rain: </div>
+                    </div>
+                </span>
+            </div>
+            <div id="selected-day-details">
+                <div id="selected-day-title">Day Selected</div>
+                <div id="selected-weather-header">
+                    <div id="selected-weather-image"><img id="selected-day-image" src="img/error.jpg"></div>
+                    <div id="selected-day-stats">
+                        <div id="selected-day-high">Hi: 96°</div>
+                        <div id="selected-day-low">Lo: 75°</div>
+                        <div id="selected-day-descriptor">Mostly Cloudly, chance of light rain</div>
+                        <div id="selected-day-rain">Rain: 40%</div>
+                    </div>
+                </div>
+                <div id="selected-tempatures">
+                    <div class="hour-details">
+                        <div class="hour">N/A</div>
+                        <div class="hour-high">N/A</div>
+                        <div class="hour-high">N/A</div>
+                        <div class="hour-rain">N/A</div>
+                    </div>
+                    <div class="hour-details">
+                        <div class="hour">N/A</div>
+                        <div class="hour-high">N/A</div>
+                        <div class="hour-high">N/A</div>
+                        <div class="hour-rain">N/A</div>
+                    </div>
+                    <div class="hour-details">
+                        <div class="hour">N/A</div>
+                        <div class="hour-high">N/A</div>
+                        <div class="hour-high">N/A</div>
+                        <div class="hour-rain">N/A</div>
+                    </div>
+                    <div class="hour-details">
+                        <div class="hour">N/A</div>
+                        <div class="hour-high">N/A</div>
+                        <div class="hour-high">N/A</div>
+                        <div class="hour-rain">N/A</div>
+                    </div>
+                    <div class="hour-details">
+                        <div class="hour">N/A</div>
+                        <div class="hour-high">N/A</div>
+                        <div class="hour-high">N/A</div>
+                        <div class="hour-rain">N/A</div>
+                    </div>
+                    <div class="hour-details">
+                        <div class="hour">N/A</div>
+                        <div class="hour-high">N/A</div>
+                        <div class="hour-high">N/A</div>
+                        <div class="hour-rain">N/A</div>
+                    </div>
+                    <div class="hour-details">
+                        <div class="hour">N/A</div>
+                        <div class="hour-high">N/A</div>
+                        <div class="hour-high">N/A</div>
+                        <div class="hour-rain">N/A</div>
+                    </div>
+                    <div class="hour-details">
+                        <div class="hour">N/A</div>
+                        <div class="hour-high">N/A</div>
+                        <div class="hour-high">N/A</div>
+                        <div class="hour-rain">N/A</div>
+                    </div>
+                    <div class="hour-details">
+                        <div class="hour">N/A</div>
+                        <div class="hour-high">N/A</div>
+                        <div class="hour-high">N/A</div>
+                        <div class="hour-rain">N/A</div>
+                    </div>
+                    <div class="hour-details">
+                        <div class="hour">N/A</div>
+                        <div class="hour-high">N/A</div>
+                        <div class="hour-high">N/A</div>
+                        <div class="hour-rain">N/A</div>
+                    </div>
+                </div>
+            </div> 
+        </div>    
+        <script src="weather.js"></script>    
+    </body>
+    
+</html>
