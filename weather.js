@@ -159,21 +159,21 @@ function forecastPictures(){
         }
         switch(true){
             case descriptorKeywords("heavy"):
-                dayWeatherImage[i - 1].children[0].setAttribute("src","img/heavyrain.jpg");
+                dayWeatherImage[i - 1].children[0].setAttribute("src","/img/heavyrain.jpg");
                 break;
             case descriptorKeywords("light"):
             case descriptorKeywords("showers"):
-                dayWeatherImage[i - 1].children[0].setAttribute("src","img/lightrain.jpg");
+                dayWeatherImage[i - 1].children[0].setAttribute("src","/img/lightrain.jpg");
                 break;
             case descriptorKeywords("windy"):
             case descriptorKeywords("breezy"):
-                dayWeatherImage[i - 1].children[0].setAttribute("src","img/windy.jpg");
+                dayWeatherImage[i - 1].children[0].setAttribute("src","/img/windy.jpg");
                 break;
             case descriptorKeywords("cloudy"):
-                dayWeatherImage[i - 1].children[0].setAttribute("src","img/cloudy.jpg");
+                dayWeatherImage[i - 1].children[0].setAttribute("src","/img/cloudy.jpg");
                 break;
             case descriptorKeywords("sunny"):
-                dayWeatherImage[i - 1].children[0].setAttribute("src","img/sunny.gif");
+                dayWeatherImage[i - 1].children[0].setAttribute("src","/img/sunny.gif");
                 break;
         }
     }
