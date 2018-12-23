@@ -2,7 +2,7 @@
   <head></head>
   <body>
       
-      <div id="testDiv">Hello</div>
+      <div id="leaderboard">Hello</div>
     <script>
     function makeApiCall() {
       var params = {
@@ -57,8 +57,19 @@
         
     function leaderboard(data){
         console.log(data);
-        var divTest = document.getElementById("testDiv");
-        divTest.innerHTML = data.values[2];
+        var leaderboardDiv = document.getElementById("leaderboard");
+        leaderboardDiv.innerHTML = data.values[2];
+        for(i=0; i<data.values.length;i++){
+            var columnDiv = document.createElement("div");
+            leaderboard.append(columnDiv);
+            leaderboard.children[i].setAttribute("id","column-" + (i+1));
+            for(j=0; j<data.values[i].length; j++){
+                var rowSpan = document.createElement("Span");
+                var columnSet = document.getElementById("column-" + (i+1));
+                columnSet.append(rowSpan);
+                columnSet.children[i].setAttribute("id", "span" + ((i*10) + (j+1)));
+            }
+        }
         
         
     }
