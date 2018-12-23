@@ -173,9 +173,9 @@ var lastTime = timeStamp();
 
 function scoreUpdate(){
     currentScore = Number(points.innerHTML);
-    valueAddedSnake = snakeLengthArray.length * 17;
-    valueAddedSpeed = 100 / snakeSpeedValue;
-    valueAddedTime = 10000 / (timeStamp() - lastTime);
+    valueAddedSnake = Math.pow(snakeLengthArray.length, 2);
+    valueAddedSpeed = Math.pow((120 / snakeSpeedValue), 3);
+    valueAddedTime = 5000 / (timeStamp() - lastTime);
     lastTime = timeStamp();
     currentScore += Math.round(valueAddedSnake * valueAddedSpeed * valueAddedTime);
     points.innerHTML = currentScore;
@@ -195,5 +195,5 @@ function timeStamp(){
 
 -sound effects???
 
--top 5 score board???
+-top 10 score board???
 */
