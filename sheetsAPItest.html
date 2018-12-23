@@ -12,7 +12,7 @@
       request.then(function(response) {
         // TODO: Change code below to process the `response` object:
         console.log(response.result);
-        leaderboard(response.result.values);
+        leaderboard(response.result);
       }, function(reason) {
         console.error('error: ' + reason.result.error.message);
       });
