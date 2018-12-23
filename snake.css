@@ -1,0 +1,38 @@
+*{
+	border: 0px;
+	padding: 0px;
+	margin: 0px;
+}
+
+#game-container{
+	background-color: cadetblue;
+	width: 1000px;
+	height: 1000px;	
+	margin: 10px auto;
+}
+
+.block-line{
+	display: flex;
+}
+
+.game-block{
+	background-color: black;
+}
+
+.snake{
+	background-color: slategrey;
+}
+
+.apple{
+	background-color: red;
+}
+
+#score{
+    background-color:darkslategray;
+	width: 1000px;
+	height: 100px;	
+	margin: 10px auto;
+    text-align: center;
+    font-size: 80px;
+    color: pink;
+}
