@@ -55,23 +55,22 @@
       gapi.auth2.getAuthInstance().signOut();
     }
         
-    function leaderboard(data){
-        console.log(data);
-        var leaderboardDiv = document.getElementById("leaderboard");
-        leaderboardDiv.innerHTML = data.values[2];
-        for(i=0; i<data.values.length;i++){
+    function leaderboardBuild(data){
+        var leaderboard = document.getElementById("leaderboard");
+        var leaderboardArray = data;
+        for(i=0; i<11;i++){
             var columnDiv = document.createElement("div");
             leaderboard.append(columnDiv);
             leaderboard.children[i].setAttribute("id","column-" + (i+1));
-            for(j=0; j<data.values[i].length; j++){
+            for(j=0; j<2; j++){
                 var rowSpan = document.createElement("Span");
                 var columnSet = document.getElementById("column-" + (i+1));
                 columnSet.append(rowSpan);
-                columnSet.children[i].setAttribute("id", "span" + ((i*10) + (j+1)));
+                columnSet.children[j].setAttribute("id", "span" + (((i+1)*10) + (j+1)));
+                var rowSet = document.getElementById("span" + (((i+1)*10) + (j+1)));
+                rowSet.innerHTML = data.values[i][j];
             }
-        }
-        
-        
+        }  
     }
     </script>
     <script async defer src="https://apis.google.com/js/api.js"
