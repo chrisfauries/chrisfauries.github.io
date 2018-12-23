@@ -12,7 +12,7 @@
       request.then(function(response) {
         // TODO: Change code below to process the `response` object:
         console.log(response.result);
-          leaderboard(response.result);
+        leaderboard(response.result.values);
       }, function(reason) {
         console.error('error: ' + reason.result.error.message);
       });
@@ -53,7 +53,7 @@
     }
         
     function leaderboard(data){
-        document.write(data);
+        console.log(data);
         
     }
     </script>
