@@ -2,7 +2,7 @@
   <head></head>
   <body>
       
-      <div id="testDiv"></div>
+      <div id="testDiv">Hello</div>
     <script>
     function makeApiCall() {
       var params = {
@@ -57,7 +57,7 @@
     function leaderboard(data){
         console.log(data);
         var divTest = document.getElementById("testDiv");
-        divTest.innerHTML = data;
+        divTest.innerHTML = data.values;
         
         
     }
