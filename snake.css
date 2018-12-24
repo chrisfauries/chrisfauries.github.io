@@ -37,20 +37,21 @@
     color: 3C1053;
 }
 
-#sign-in{
-    font-size: 20px;
-    width: 200px;
+fieldset, button{
+    padding: 7px;
+    width: 300px;
     margin: 0 auto;
     text-align: center;
+    font-size: 24px;
 }
 
 #leaderboard{
     background-color:#D29F13;
-    width: 1000px;
-	height: 600px;	
+    width: 600px;
+	height: 700px;	
 	margin: 10px auto;
     color: #3C1053;
-    font-size: 32px;
+    font-size: 60px;
 }
 
 #leaderboard div{
@@ -58,7 +59,7 @@
 
 .score-block{
     display:inline-block;
-    width: 500px;
+    width: 300px;
     margin: 0 auto;
     text-align: center;
 }

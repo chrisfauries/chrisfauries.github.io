@@ -63,8 +63,8 @@ function appleCheckandReassign(){
 //Snake Speed and Direction
 var currentDirection = 2;
 var bufferedDirection = 2;
-var snakeSpeedValue = 120000;
-var snakeSpeed = setInterval(snakeMotion, snakeSpeedValue);
+var snakeSpeedValue = 120;
+var snakeSpeed;
 
 //Key Input and Direction Change
 window.addEventListener("keydown", function(e){
@@ -131,7 +131,7 @@ function snakeMotion(){
 function snakeCheckandUpdate(){
     var testValid = document.getElementById("block-number-" + snakeLengthArray[snakeLengthArray.length -1]);
         if(testValid == null || testValid.classList.contains("snake")){
-            gameOver();
+            gameOver(); 
         }else if(testValid.classList.contains("apple")){
             appleLocation.classList.remove("apple");
             appleLocation.classList.add("snake");
@@ -154,17 +154,12 @@ function newSnakeSpeed(){
 //Game Over
 function gameOver(){
     clearInterval(snakeSpeed);
-    setTimeout(reloadGame(), 3000);   //not working
-    /*for(i=0; i<allBlocksArray.length;i++){
-        var blockSegment = document.getElementById("block-number-" + allBlocksArray[0]);
-        if(blockSegment.classList == "snake")
-        blockSegment.classList.remove("snake");
-        blockSegment.classList.remove("apple");
-    }*/
-}
-
-function reloadGame(){
-    location.reload();
+    saveScore();
+    sortLeaderboard();
+    leaderboardBuild();
+    alert("Your Score was: " + points.innerHTML + "\n press 'OK' to restart");
+    setTimeout(function(){ location.reload(); },1000);
+   
 }
 
 //Points
@@ -187,85 +182,66 @@ function timeStamp(){
     return n;
 }
 
+var inpInt = document.getElementById("inpInt");
+var btnSave = document.getElementById("btnSave");
+var userInitials;
+var topScoresArray = [];
 
-/* Things to add to the game
+btnSave.onclick = function(){
+    userInitials = inpInt.value.toUpperCase();
+    var status = document.getElementById("status");
+    status.innerHTML = "Thanks, " + userInitials + ". Your Initials have been Saved!";
+    console.log(userInitials.toUpperCase());
+    setTimeout(function(){snakeSpeed = setInterval(snakeMotion, snakeSpeedValue);},4000);
+    btnSave.disabled = true;
+    setInterval(function(){ctdn.next();},1000);
+}
 
-
--enhance the game over experience
-
--sound effects???
-
--top 10 score board???
-*/
-
-//Google Sheets API
- function makeApiCall() {
-      var params = {
-        spreadsheetId: '10NZg-s6bjPG05fmDix0np3AFx7X6qHaHAIreBfQ74RU',
-        range: 'TopScores',
-      };
-
-      var request = gapi.client.sheets.spreadsheets.values.get(params);
-      request.then(function(response) {
-        // TODO: Change code below to process the `response` object:
-        console.log(response.result);
-        var leaderboardArray = response.result;
-        leaderboardBuild(leaderboardArray);
-      }, function(reason) {
-        console.error('error: ' + reason.result.error.message);
-      });
+function* countdown(){
+    for(k=3;k>=0;k--){
+       yield btnSave.innerHTML= k;
     }
+}
 
-    function initClient() {
-      var API_KEY = 'AIzaSyBgV_HfxxJfedt_d3ntxLYwXHXgsBY3EQo';
-      var CLIENT_ID = '8406693302-shvvmvq11sm545294i3i9rehk4qpst5b.apps.googleusercontent.com';
-      var SCOPE = 'https://www.googleapis.com/auth/spreadsheets.readonly';
+var ctdn = countdown();
 
-      gapi.client.init({
-        'apiKey': API_KEY,
-        'clientId': CLIENT_ID,
-        'scope': SCOPE,
-        'discoveryDocs': ['https://sheets.googleapis.com/$discovery/rest?version=v4'],
-      }).then(function() {
-        gapi.auth2.getAuthInstance().isSignedIn.listen(updateSignInStatus);
-        updateSignInStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
-      });
+function sortLeaderboard(){
+    for(i=0;i<localStorage.length;i++){
+        var scoreName = localStorage.key(i);
+        var scoreValue = localStorage.getItem(scoreName);
+        topScoresArray[i] = [scoreName, Number(scoreValue)];
+        topScoresArray.sort(Comparator);
     }
+}
+function Comparator(a, b) {
+   if (b[1] < a[1]) return -1;
+   if (b[1] > a[1]) return 1;
+   return 0;
+ }
 
-    function handleClientLoad() {
-      gapi.load('client:auth2', initClient);
-    }
+function leaderboardBuild(){
+    var leaderboard = document.getElementById("leaderboard");
+    for(i=0; i<topScoresArray.length;i++){
+        var columnDiv = document.createElement("div");
+        leaderboard.append(columnDiv);
+        leaderboard.children[i].setAttribute("id","column-" + (i+1));
+        for(j=0; j<topScoresArray[i].length; j++){
+            var rowSpan = document.createElement("Span");
+            var columnSet = document.getElementById("column-" + (i+1));
+            columnSet.append(rowSpan);
+            columnSet.children[j].setAttribute("id", "span" + (((i+1)*10) + (j+1)));
+            var rowSet = document.getElementById("span" + (((i+1)*10) + (j+1)));
+            rowSet.innerHTML = topScoresArray[i][j];
+            rowSet.classList.add("score-block");
+        }
+    }  
+}
 
-    function updateSignInStatus(isSignedIn) {
-      if (isSignedIn) {
-        makeApiCall();
-      }
+function saveScore(){
+    if(Number(points.innerHTML) > Number(localStorage.getItem(userInitials))){
+        localStorage.setItem(userInitials,points.innerHTML);
     }
+}
 
-    function handleSignInClick(event) {
-      gapi.auth2.getAuthInstance().signIn();
-    }
-
-    function handleSignOutClick(event) {
-      gapi.auth2.getAuthInstance().signOut();
-    }
-        
-    function leaderboardBuild(data){
-        var leaderboard = document.getElementById("leaderboard");
-        var leaderboardArray = data;
-        for(i=0; i<11;i++){
-            var columnDiv = document.createElement("div");
-            leaderboard.append(columnDiv);
-            leaderboard.children[i].setAttribute("id","column-" + (i+1));
-            for(j=0; j<2; j++){
-                var rowSpan = document.createElement("Span");
-                var columnSet = document.getElementById("column-" + (i+1));
-                columnSet.append(rowSpan);
-                columnSet.children[j].setAttribute("id", "span" + (((i+1)*10) + (j+1)));
-                var rowSet = document.getElementById("span" + (((i+1)*10) + (j+1)));
-                rowSet.innerHTML = data.values[i][j];
-                rowSet.classList.add("score-block");
-            }
-        }  
-    }
-
+sortLeaderboard();
+leaderboardBuild();
