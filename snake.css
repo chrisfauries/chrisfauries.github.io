@@ -37,18 +37,25 @@
     color: 3C1053;
 }
 
+#sign-in{
+    font-size: 20px;
+    margin: 0 auto;
+}
+
 #leaderboard{
     background-color:#D29F13;
     width: 1000px;
-	height: 1000px;	
+	height: 600px;	
 	margin: 10px auto;
-    color: 3C1053;
+    color: #3C1053;
     font-size: 32px;
-    display: flex;
+}
+
+#leaderboard div{
 }
 
 .score-block{
+    width: 500px;
     margin: 0 auto;
     text-align: center;
-    
 }
