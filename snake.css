@@ -39,7 +39,9 @@
 
 #sign-in{
     font-size: 20px;
+    width: 200px;
     margin: 0 auto;
+    text-align: center;
 }
 
 #leaderboard{
