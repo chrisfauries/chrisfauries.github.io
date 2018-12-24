@@ -63,7 +63,7 @@ function appleCheckandReassign(){
 //Snake Speed and Direction
 var currentDirection = 2;
 var bufferedDirection = 2;
-var snakeSpeedValue = 120;
+var snakeSpeedValue = 120000;
 var snakeSpeed = setInterval(snakeMotion, snakeSpeedValue);
 
 //Key Input and Direction Change
@@ -197,3 +197,74 @@ function timeStamp(){
 
 -top 10 score board???
 */
+
+//Google Sheets API
+ function makeApiCall() {
+      var params = {
+        spreadsheetId: '10NZg-s6bjPG05fmDix0np3AFx7X6qHaHAIreBfQ74RU',
+        range: 'TopScores',
+      };
+
+      var request = gapi.client.sheets.spreadsheets.values.get(params);
+      request.then(function(response) {
+        // TODO: Change code below to process the `response` object:
+        console.log(response.result);
+        var leaderboardArray = response.result;
+        leaderboardBuild(leaderboardArray);
+      }, function(reason) {
+        console.error('error: ' + reason.result.error.message);
+      });
+    }
+
+    function initClient() {
+      var API_KEY = 'AIzaSyBgV_HfxxJfedt_d3ntxLYwXHXgsBY3EQo';
+      var CLIENT_ID = '8406693302-shvvmvq11sm545294i3i9rehk4qpst5b.apps.googleusercontent.com';
+      var SCOPE = 'https://www.googleapis.com/auth/spreadsheets.readonly';
+
+      gapi.client.init({
+        'apiKey': API_KEY,
+        'clientId': CLIENT_ID,
+        'scope': SCOPE,
+        'discoveryDocs': ['https://sheets.googleapis.com/$discovery/rest?version=v4'],
+      }).then(function() {
+        gapi.auth2.getAuthInstance().isSignedIn.listen(updateSignInStatus);
+        updateSignInStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+      });
+    }
+
+    function handleClientLoad() {
+      gapi.load('client:auth2', initClient);
+    }
+
+    function updateSignInStatus(isSignedIn) {
+      if (isSignedIn) {
+        makeApiCall();
+      }
+    }
+
+    function handleSignInClick(event) {
+      gapi.auth2.getAuthInstance().signIn();
+    }
+
+    function handleSignOutClick(event) {
+      gapi.auth2.getAuthInstance().signOut();
+    }
+        
+    function leaderboardBuild(data){
+        var leaderboard = document.getElementById("leaderboard");
+        var leaderboardArray = data;
+        for(i=0; i<11;i++){
+            var columnDiv = document.createElement("div");
+            leaderboard.append(columnDiv);
+            leaderboard.children[i].setAttribute("id","column-" + (i+1));
+            for(j=0; j<2; j++){
+                var rowSpan = document.createElement("Span");
+                var columnSet = document.getElementById("column-" + (i+1));
+                columnSet.append(rowSpan);
+                columnSet.children[j].setAttribute("id", "span" + (((i+1)*10) + (j+1)));
+                var rowSet = document.getElementById("span" + (((i+1)*10) + (j+1)));
+                rowSet.innerHTML = data.values[i][j];
+            }
+        }  
+    }
+
