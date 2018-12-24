@@ -43,6 +43,12 @@
 	height: 1000px;	
 	margin: 10px auto;
     color: 3C1053;
-    text-align: center;
     font-size: 32px;
+    display: flex;
+}
+
+.score-block{
+    margin: 0 auto;
+    text-align: center;
+    
 }

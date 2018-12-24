@@ -264,6 +264,7 @@ function timeStamp(){
                 columnSet.children[j].setAttribute("id", "span" + (((i+1)*10) + (j+1)));
                 var rowSet = document.getElementById("span" + (((i+1)*10) + (j+1)));
                 rowSet.innerHTML = data.values[i][j];
+                rowSet.classList.add("score-block");
             }
         }  
     }
