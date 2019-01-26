@@ -79,7 +79,6 @@ window.onload = function(){
         if(equals.className == "pressed"){
             digitPressedAttributeResetAfterEquals();
             displayActive.innerHTML = displayActive.innerHTML + number;
-            console.log(this);
             
         }else{
             digitPressedAttributeReset();
@@ -230,7 +229,7 @@ window.onload = function(){
     }
 
 	     ///// NumPad Interaction /////
-	window.addEventListener('keypress', function(e) {
+	window.addEventListener('keydown', function(e) {
 		switch(e.key) {
 			case "1":
 			case "2":
@@ -242,19 +241,20 @@ window.onload = function(){
 			case "8":
 			case "9":
 			case "0":
+				cssNumberPressed(e.key);
 				digitPressed(e.key);
 				break;
 			case "+":
 				operatorPressed(e.key);
-				addition.classList.add ("pressed");
+				cssNumberPressed(e.key);
 				break;
 			case "*":
 				operatorPressed(e.key);
-				multiplication.classList.add ("pressed");
+				cssNumberPressed(e.key);
 				break;
 			case "/":
 				operatorPressed(e.key);
-				division.classList.add ("pressed");
+				cssNumberPressed(e.key);
 				break;
 			case "-":
 				negativePressed(e.key);
@@ -275,12 +275,6 @@ window.onload = function(){
 			case "Enter":
 				equalsPressed();
 				break;
-		}
-	});
-	
-	window.addEventListener('keydown', function(e) {
-	console.log(e.key)
-		switch(e.key) {
 			case 'Delete':
 			case 'Backspace':
 			case 'Escape':
@@ -291,8 +285,78 @@ window.onload = function(){
 		}
 	});
 
+
+		///// Number Presses /////
+	var currentNumberKeyboardPress;
+	function cssNumberPressed(number) {
+		
+		if(currentNumberKeyboardPress) {
+				currentNumberKeyboardPress.classList.remove('pressed');
+			}
+	switch(number) {
+		case "1":
+			currentNumberKeyboardPress = document.querySelectorAll('.row')[3].children[0];
+			currentNumberKeyboardPress.classList.add('pressed');
+			break;
+		case "2":
+			currentNumberKeyboardPress = document.querySelectorAll('.row')[3].children[1];
+			currentNumberKeyboardPress.classList.add('pressed');
+			break;
+		case "3":
+			currentNumberKeyboardPress = document.querySelectorAll('.row')[3].children[2];
+			currentNumberKeyboardPress.classList.add('pressed');
+			break;
+		case "4":
+			currentNumberKeyboardPress = document.querySelectorAll('.row')[2].children[0];
+			currentNumberKeyboardPress.classList.add('pressed');
+			break;
+		case "5":
+			currentNumberKeyboardPress = document.querySelectorAll('.row')[2].children[1];
+			currentNumberKeyboardPress.classList.add('pressed');
+			break;
+		case "6":
+			currentNumberKeyboardPress = document.querySelectorAll('.row')[2].children[2];
+			currentNumberKeyboardPress.classList.add('pressed');
+			break;
+		case "7":
+			currentNumberKeyboardPress = document.querySelectorAll('.row')[1].children[0];
+			currentNumberKeyboardPress.classList.add('pressed');
+			break;
+		case "8":
+			currentNumberKeyboardPress = document.querySelectorAll('.row')[1].children[1];
+			currentNumberKeyboardPress.classList.add('pressed');
+			break;
+		case "9":
+			currentNumberKeyboardPress = document.querySelectorAll('.row')[1].children[2];
+			currentNumberKeyboardPress.classList.add('pressed');
+			break;
+		case "0":
+			currentNumberKeyboardPress = document.querySelectorAll('.row')[4].children[0];
+			currentNumberKeyboardPress.classList.add('pressed');
+			break;
+		case "+":
+				currentNumberKeyboardPress = addition;
+				addition.classList.add ("pressed");
+				break;
+			case "*":
+				currentNumberKeyboardPress = multiplication;
+				multiplication.classList.add ("pressed");
+				break;
+			case "/":
+				currentNumberKeyboardPress = division;
+				division.classList.add ("pressed");
+				break;
+			case "-":
+				negativePressed(e.key);
+				break;
+	}
+}
+
 	
 }
+
+
+///// Number Presses /////
 
 
 
