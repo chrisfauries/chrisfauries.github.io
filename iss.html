@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <script src='https://api.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css' rel='stylesheet' />
+    <!-- <link href='main.css' rel='stylesheet' />
+    <script src="main.js" charset="utf-8"></script> -->
+    <title>ISS Tracker</title>
+  </head>
+  <body>
+      <div id='map' style='width: 400px; height: 300px;'></div>
+        <script>
+        mapboxgl.accessToken = 'pk.eyJ1IjoiY2pmMjE4NyIsImEiOiJjanNsN280bHoxZ201NDRxb29ua3NpajFuIn0.lIeOAqQU6e81QHWWG5GrOw';
+        var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v11'
+        });
+        var newid;
+        var updateMap = function(){
+           fetch('http://api.open-notify.org/iss-now.json')
+          .then(function(response) {
+            return response.json();
+          })
+          .then(function(issCoors) {
+            newid = makeid();
+            console.log(issCoors);
+            issPositionHistoryArr.push([issCoors.iss_position.longitude, issCoors.iss_position.latitude, issCoors.timestamp])
+            updateLocation(issCoors.iss_position.longitude, issCoors.iss_position.latitude, newid);
+          });
+        }
+
+          updateMap();
+          setInterval(function(){
+              map.removeLayer(newid);
+              updateMap();
+            }, 3000);
+
+        var issImage = map.loadImage('https://static.thenounproject.com/png/956251-200.png', function(error, image) {
+            if (error) throw error;
+            map.addImage('iss', image);
+          });
+
+function updateLocation(long, lat, id) {
+            map.addLayer({
+              "id": id,
+              "type": "symbol",
+              "source": {
+                "type": "geojson",
+                "data": {
+                "type": "FeatureCollection",
+                "features": [{
+                  "type": "Feature",
+                  "geometry": {
+                    "type": "Point",
+                    "coordinates": [long, lat]
+                  }
+                }]
+              }
+            },
+          "layout": {
+          "icon-image": "iss",
+          "icon-size": 0.25
+        }
+      });
+}
+
+var issPositionHistoryArr = [];
+
+function buildISSHistory (coorsArr) {
+    var pointsArr = [];
+    coorsArr.forEach(function(coord) {
+      pointsArr.push({
+        "type": "Feature",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [coord[0], coord[1]]
+          },
+          "properties": {
+            "title": new Date(Number(coord[2].toString() + '000')).toString().slice(15,24),
+            "icon": "marker"
+          }
+      });
+    });
+  var data = {
+    "type": "FeatureCollection",
+    "features": pointsArr
+    };
+  return data;
+}
+
+function addPointHistory (data) {
+  map.addLayer({
+    "id": makeid(),
+    "type": "symbol",
+    "source": {
+    "type": "geojson",
+      "data": data
+    },
+    "layout": {
+      "icon-image": "{icon}-15",
+      "text-field": "{title}",
+      "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+      "text-offset": [0, 0.6],
+      "text-anchor": "top"
+    }
+  });
+}
+
+
+
+function makeid() {
+  var text = "";
+  var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  for (var i = 0; i < 9; i++) {
+    text += possible.charAt(Math.floor(Math.random() * possible.length));
+  }
+  return text;
+}
+
+
+        </script>
+        <button onclick="addPointHistory(buildISSHistory(issPositionHistoryArr))">See Point History</button>
+  </body>
+</html>
