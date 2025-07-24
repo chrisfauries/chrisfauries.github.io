@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/flashcards/static/css/main.09db799a.css",
-    "main.js": "/flashcards/static/js/main.2d92827c.js",
+    "main.js": "/flashcards/static/js/main.a3cf3db9.js",
     "static/js/453.08b1b411.chunk.js": "/flashcards/static/js/453.08b1b411.chunk.js",
     "static/media/walshBandLogo.jpg": "/flashcards/static/media/walshBandLogo.e130aef6a4cd202b0a4b.jpg",
     "static/media/Gb6.jpg": "/flashcards/static/media/Gb6.8eee67723c38b104a9af.jpg",
@@ -100,11 +100,11 @@
     "static/media/B2.jpg": "/flashcards/static/media/B2.f50dcf71539783bf201b.jpg",
     "index.html": "/flashcards/index.html",
     "main.09db799a.css.map": "/flashcards/static/css/main.09db799a.css.map",
-    "main.2d92827c.js.map": "/flashcards/static/js/main.2d92827c.js.map",
+    "main.a3cf3db9.js.map": "/flashcards/static/js/main.a3cf3db9.js.map",
     "453.08b1b411.chunk.js.map": "/flashcards/static/js/453.08b1b411.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.09db799a.css",
-    "static/js/main.2d92827c.js"
+    "static/js/main.a3cf3db9.js"
   ]
 }
